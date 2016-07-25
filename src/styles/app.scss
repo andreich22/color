@@ -1,0 +1,58 @@
+html{
+    width  : 100%;
+    height : 100%;
+    padding: 0;
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background: black;
+}
+
+.footer{
+    position: fixed;
+    bottom: 1px;
+    border-radius: 0;
+    height: 60px;
+    width: 100%;
+    border-top: 1px solid gray;
+}
+
+div{
+
+}
+
+div#root {
+    width: 100%;
+    height: 100%;
+}
+
+.wrap {
+    width: 100%;
+    height: 100%;
+}
+
+.one{
+    display: inline-block;
+    margin: 0;
+    width: 33%;
+    height: 60%;
+}
+
+.two{
+    display: inline-block;
+    margin: 0;
+    width: 33%;
+    height: 60%;
+}
+
+.tre{
+    display: inline-block;
+    margin: 0;
+    width: 33%;
+    height: 60%;
+}
+
