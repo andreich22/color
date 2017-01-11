@@ -23,7 +23,6 @@ export default class ButtonBasic extends Component {
         this.props.clikHandler(x)
     }
 
-
     render() {
     const {text} = this.props;
 
