@@ -24,7 +24,7 @@ export default class ListLtem extends Component {
     clickHnadlerСheckbox (x) {
         const {target} = x;
         const {id} = this.props;
-        this.props.markCheckbox({id, target})
+        this.props.toogleChekbox({id, target})
     }
 
 

@@ -35,7 +35,7 @@ export default function task(state = initialState, action) {
     const {payload, type} = action;
     switch (type) {
       //Переключает чекбоксы
-        case types.TASK_SHOULD_BY_DELETE:
+        case types.TASK_TOOGLE_CHEKBOX:
             return helpers.toogleCheckbox(state, payload)
       //Удаляет задачи
         case types.TASK_DELETE:
@@ -45,7 +45,7 @@ export default function task(state = initialState, action) {
             return helpers.createTask(state, payload)
       //Отменить создание новой задачи
         case types.TASK_CREATE_CANCEL:
-            return helpers.CancelCreateTask(state, payload)
+            return helpers.cancelCreateTask(state, payload)
       //Сохранить задачу соданую залдачу
         case types.TASK_CREATE_CSAVE:
             return helpers.taskSaveCreate(state, payload)

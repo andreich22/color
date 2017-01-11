@@ -24,8 +24,8 @@ class App extends Component {
     this.addNewTask = this.addNewTask.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
     this.clickHnadlerButton = this.clickHnadlerButton.bind(this);
-    this.markCheckbox = this.markCheckbox.bind(this);
-    this.CancelCreateTask = this.CancelCreateTask.bind(this);
+    this.toogleChekbox = this.toogleChekbox.bind(this);
+    this.cancelCreateTask = this.cancelCreateTask.bind(this);
     this.editFieldTask = this.editFieldTask.bind(this);
     this.editFieldCreateTask = this.editFieldCreateTask.bind(this);
     this.taskEditedSave = this.taskEditedSave.bind(this);
@@ -58,14 +58,14 @@ class App extends Component {
     this.actionsTask.editTask({id})
   }
 
-  markCheckbox (x) {
+  toogleChekbox (x) {
     const {id, target : {name}} = x
-    this.actionsTask.markCheckbox({id, name})
+    this.actionsTask.toogleChekbox({id, name})
   }
 
   // Отменить создание задачи
-  CancelCreateTask() {
-    this.actionsTask.CancelCreateTask();
+  cancelCreateTask() {
+    this.actionsTask.cancelCreateTask();
   }
 
   //Редактировать поле созданой задачи
@@ -109,7 +109,7 @@ class App extends Component {
             
             <ListLView 
               tasks={tasks} 
-              markCheckbox={this.markCheckbox}
+              toogleChekbox={this.toogleChekbox}
               clickHnadlerButton={this.clickHnadlerButton}
             />
             
@@ -122,7 +122,7 @@ class App extends Component {
               valueTextarea={createTask.bodyTask}
               nameTextarea='bodyTask'
               save={this.taskCreateSave}
-              cancel={this.CancelCreateTask}
+              cancel={this.cancelCreateTask}
             />
 
             <ModalBase 
@@ -134,7 +134,7 @@ class App extends Component {
               valueTextarea={editedTask.bodyTask}
               nameTextarea='bodyTask'
               save={this.taskEditedSave}
-              cancel={this.CancelCreateTask}
+              cancel={this.cancelCreateTask}
             />
     </div>
   }

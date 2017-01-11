@@ -6,9 +6,9 @@ import * as types from '../constans/taskActionTypes';
  * @param {string} payload идентификатор элемента
  * @returns {ReduxAction}
  */
-export function markCheckbox(payload) {
+export function toogleChekbox(payload) {
     return {
-        type: types.TASK_SHOULD_BY_DELETE,
+        type: types.TASK_TOOGLE_CHEKBOX,
         payload: payload
     };
 }
@@ -37,7 +37,7 @@ export function createTask() {
  * Создать задачу
  * @returns {ReduxAction}
  */
-export function CancelCreateTask() {
+export function cancelCreateTask() {
     return {
         type: types.TASK_CREATE_CANCEL,
     };

@@ -5,10 +5,10 @@
 export const TASK_ADD = '@@TASK_ADD';
 
 /**
- * отметить элемент для удаления
+ * Переключает состояние chekbox
  * @type {string}
  */
-export const TASK_SHOULD_BY_DELETE = 'TASK_SHOULD_BY_DELETE';
+export const TASK_TOOGLE_CHEKBOX = 'TASK_TOOGLE_CHEKBOX';
 
 /**
  * Удалить задачи

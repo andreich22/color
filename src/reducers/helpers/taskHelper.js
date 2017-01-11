@@ -96,7 +96,7 @@ export function taskSaveCreate (state) {
 /**
  * Отменить создание задачи
  */
-export function CancelCreateTask (state) {
+export function cancelCreateTask (state) {
     return {...state, neededCreateNewTask : false, startEditedTask: false,  createTask : {}}
 }
 
