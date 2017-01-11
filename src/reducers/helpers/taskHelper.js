@@ -121,7 +121,7 @@ export function taskSaveCreate (state) {
 /**
  * Отменить создание задачи
  */
-export function CancelCreateTask (state) {
+export function cancelCreateTask (state) {
     recLocalstorage({...state, neededCreateNewTask : false, startEditedTask: false,  createTask : {}})
     return {...state, neededCreateNewTask : false, startEditedTask: false,  createTask : {}}
 }
