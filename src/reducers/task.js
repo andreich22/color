@@ -27,12 +27,19 @@ const initialState = {
   neededCreateNewTask: false
 };
 
+// localStorage.setItem('task' , '');
+
 //Если localStorage не пустой то берем state из него
 function getInit (initialState){
-  const storageState = JSON.parse(localStorage.task)
+  let storageState = {};
+  if(localStorage.task){
+    storageState = JSON.parse(localStorage.task)
+  }
+
   if(isEmpty(storageState) === false){
     return storageState
   }
+
   JSON.stringify(initialState)
   localStorage.setItem('task' , JSON.stringify(initialState));
   return initialState
