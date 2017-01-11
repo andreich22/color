@@ -37,7 +37,7 @@ export function createTask() {
  * Создать задачу
  * @returns {ReduxAction}
  */
-export function createTaskCancel() {
+export function CancelCreateTask() {
     return {
         type: types.TASK_CREATE_CANCEL,
     };
@@ -45,12 +45,23 @@ export function createTaskCancel() {
 
 
 /**
- * Сохранить задачу
+ * Сохранить редактируемую задачу
  * @returns {ReduxAction}
  */
-export function taskSave() {
+export function taskSave(payload) {
     return {
-        type: types.TASK_CREATE_CSAVE,
+        type: types.TASK_SAVE_EDITING,
+        payload: payload
+    };
+}
+
+/**
+ * Сохранить созданую задачу
+ * @returns {ReduxAction}
+ */
+export function taskSaveCreate() {
+    return {
+        type: types.TASK_CREATE_CSAVE
     };
 }
 
@@ -61,6 +72,17 @@ export function taskSave() {
 export function editField(payload) {
     return {
         type: types.TASK_EDIT_FIELD,
+        payload: payload
+    };
+}
+
+/**
+ * Редактировать поле
+ * @returns {ReduxAction}
+ */
+export function editTask(payload) {
+    return {
+        type: types.TASK_EDIT,
         payload: payload
     };
 }

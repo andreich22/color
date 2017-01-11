@@ -33,7 +33,7 @@ export default class ListLtem extends Component {
 
     render() {
 
-    const {name, textTask, checkedDelete, checkedFinish, idTask, taskFinish} = this.props;
+    const {name, textTask, checkedDelete, checkedFinish, id} = this.props;
 
     return <div className='list-item'>
                 <div className='list-item-head'>{name}</div>
@@ -53,11 +53,10 @@ export default class ListLtem extends Component {
                     onClick={this.clickHnadlerСheckbox}  
                 />Завершить задачу
                 <ButtonBasic 
-                    idTask={idTask}
+                    id={id}
                     clikHandler={this.clickHnadlerButton}
                     text='Редактировать задачу' 
                 />
-                {taskFinish ? 'задача завершена' : null}
            </div>
     }
 }

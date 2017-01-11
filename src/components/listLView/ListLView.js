@@ -10,7 +10,7 @@ export default class ListLView extends Component {
     }
 
     renderListItem (props) {
-      const {tasks, markCheckbox} = props;
+      const {tasks, markCheckbox, clickHnadlerButton} = props;
       return tasks.map((elem, i) => {
         return <ListLtem 
                   key={`${i}-key`}
@@ -20,7 +20,7 @@ export default class ListLView extends Component {
                   checkedDelete={elem.shouldByDelete}
                   checkedFinish={elem.shouldByFinish}
                   markCheckbox={markCheckbox}
-                  clickHnadlerButton={this.clickHnadlerButton}
+                  clickHnadlerButton={clickHnadlerButton}
               />
       })
     }

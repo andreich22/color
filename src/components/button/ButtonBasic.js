@@ -24,10 +24,10 @@ export default class ButtonBasic extends Component {
     }
 
     render() {
-    const {text} = this.props;
+    const {text, id} = this.props;
 
     return <div>
-                <button onClick={this.clikHandler}>{text}</button>
+                <button id={id} onClick={this.clikHandler}>{text}</button>
             </div>
     }
 }

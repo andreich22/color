@@ -22,6 +22,9 @@ const initialState = {
   ],
   createTask : {},
   shouldByCreateNewTask : false,
+  editedTask : false,
+  startEditedTask: false,
+  neededCreateNewTask: false
 };
 
 
@@ -44,13 +47,20 @@ export default function task(state = initialState, action) {
             return helpers.createTask(state, payload)
       //Отменить создание новой задачи
         case types.TASK_CREATE_CANCEL:
-            return helpers.createTaskCancel(state, payload)
-      //Сохранить задачу
+            return helpers.CancelCreateTask(state, payload)
+      //Сохранить задачу соданую залдачу
         case types.TASK_CREATE_CSAVE:
-            return helpers.taskSave(state, payload)
+            return helpers.taskSaveCreate(state, payload)
       //Редактировать поле
         case types.TASK_EDIT_FIELD:
             return helpers.editField(state, payload)
+      //Редактировать поле
+        case types.TASK_EDIT:
+            return helpers.editTask(state, payload)
+      //Сохранить редактируемую задачу
+        case types.TASK_SAVE_EDITING:
+            return helpers.taskSave(state, payload)
+            
 
             
 

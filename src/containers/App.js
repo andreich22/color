@@ -1,21 +1,13 @@
 import React, { Component} from 'react'
 import {connect}              from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
 import ButtonBasic from '../components/button/ButtonBasic'
 import ListLView from '../components/listLView/ListLView'
+import ModalBase from '../components/modal/ModalBase'
 import * as taskAction from '../actions/taskAction'
 
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
+
 
 //home/andrey/project/wily/color/src/actions/taskAction.js
 //home/andrey/project/wily/color/src/containers/App.js
@@ -30,9 +22,12 @@ class App extends Component {
     this.deleteTask = this.deleteTask.bind(this);
     this.clickHnadlerButton = this.clickHnadlerButton.bind(this);
     this.markCheckbox = this.markCheckbox.bind(this);
-    this.createTaskCancel = this.createTaskCancel.bind(this);
-    this.editField = this.editField.bind(this);
+    this.CancelCreateTask = this.CancelCreateTask.bind(this);
+    this.editFieldTask = this.editFieldTask.bind(this);
+    this.editFieldCreateTask = this.editFieldCreateTask.bind(this);
     
+    this.taskEditedSave = this.taskEditedSave.bind(this);
+    this.taskCreateSave = this.taskCreateSave.bind(this);
     
 	}
 
@@ -51,7 +46,8 @@ class App extends Component {
 
   //Редактировать задачу
   clickHnadlerButton (x) {
-    console.log('clickHnadlerButton' ,x)
+    const {id} = x.target;
+    this.actionsTask.editTask({id})
   }
 
   markCheckbox (x) {
@@ -60,17 +56,37 @@ class App extends Component {
     this.actionsTask.markCheckbox({id, name})
   }
 
-  createTaskCancel() {
-    this.actionsTask.createTaskCancel();
+  // Отменить создание задачи
+  CancelCreateTask() {
+    this.actionsTask.CancelCreateTask();
   }
 
-  editField (x) {
+  //Редактировать поле созданой задачи
+  editFieldCreateTask (x) {
     const {name, value} =x.target
-    this.actionsTask.editField({name, value})
+    this.actionsTask.editField({name, value, typeTask : 'createTask' })
+  }
+
+  //Редактировать поле задачи
+  editFieldTask (x) {
+    const {name, value} =x.target
+    this.actionsTask.editField({name, value, typeTask : 'editedTask' })
+  }
+
+  //Схранить созданую задачу
+  taskCreateSave() {
+    this.actionsTask.taskSaveCreate()
+  }
+
+  //Схранить редактируемую задачу
+  taskEditedSave() {
+    const {editedTask} = this.props;
+    const {id} = editedTask;
+    this.actionsTask.taskSave({id : id})
   }
 
   render() {
-    const {tasks, neededCreateNewTask, createTask} = this.props;
+    const {tasks, neededCreateNewTask, createTask, editedTask, startEditedTask} = this.props;
 
     return <div>
             <ButtonBasic 
@@ -89,18 +105,29 @@ class App extends Component {
               clickHnadlerButton={this.clickHnadlerButton}
             />
             
-            <Modal
-              isOpen={neededCreateNewTask}
-              style={customStyles}
-              contentLabel='Example Modal'
-            >
+            <ModalBase 
+              isOpen={neededCreateNewTask }
+              update={this.editFieldCreateTask}
+              valueInput={createTask.nameTask}
+              nameValue='nameTask'
+              valueTextarea={createTask.bodyTask}
+              nameTextarea='bodyTask'
+              save={this.taskCreateSave}
+              cancel={this.CancelCreateTask}
+            />
 
-              <h2 ref='subtitle'>Создайте задачу</h2>
-                <input value={createTask.nameTask} name='nameTask' onChange={this.editField}/>
-                <textarea value={createTask.bodyTask} name='bodyTask' onChange={this.editField}/>
-                <button onClick={this.actionsTask.taskSave}>Сохранить</button>
-                <button onClick={this.createTaskCancel}>Отмена</button>
-            </Modal>
+            <ModalBase 
+              isOpen={startEditedTask}
+              update={this.editFieldTask}
+              valueInput={editedTask.nameTask}
+              nameValue='nameTask'
+              valueTextarea={editedTask.bodyTask}
+              nameTextarea='bodyTask'
+              save={this.taskEditedSave}
+              cancel={this.CancelCreateTask}
+            />
+
+            
 
     </div>
   }

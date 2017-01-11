@@ -43,3 +43,15 @@ export const TASK_CREATE_CSAVE = 'TASK_CREATE_CSAVE';
  * @type {string}
  */
 export const TASK_EDIT_FIELD = 'TASK_EDIT_FIELD';
+
+/**
+ * Редактирование задачи
+ * @type {string}
+ */
+export const TASK_EDIT = 'TASK_EDIT';
+
+/**
+ * Сохранить редактируемую задачу
+ * @type {string}
+ */
+export const TASK_SAVE_EDITING = 'TASK_SAVE_EDITING';
