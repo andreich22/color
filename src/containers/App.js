@@ -6,7 +6,15 @@ import ListLView from '../components/listLView/ListLView'
 import ModalBase from '../components/modal/ModalBase'
 import * as taskAction from '../actions/taskAction'
 
-
+/**
+ * Класс, создающий контейнер приложения.
+ * @param {object} props  Свойства.
+ * @param {array} [props.tasks]  Массив задач.
+ * @param {object} [props.createTask]  Содержит объект задачи до ее сохранения или отмены.
+ * @param {object} [props.editedTask]  Содержит объект редактируемой задачи до ее сохранения или отмены.
+ * @param {boolean} [props.startEditedTask] Нужно ли начать редактирование задачи
+ * @param {function} props.neededCreateNewTask Нужно ли начать создание задачи
+ */
 class App extends Component {
 
   constructor(props) {

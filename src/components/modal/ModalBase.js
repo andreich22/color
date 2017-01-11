@@ -51,7 +51,7 @@ export default function ModalBase(props) {
                     clikHandler={cancel}
                     text='Отмена' 
                 />
-                
+
             </Modal>
     );
 }
