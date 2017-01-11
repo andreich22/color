@@ -1,5 +1,10 @@
 import {randomId} from '../../lib/id';
 
+//Обновляет localStorage
+function recLocalstorage(args) {
+    localStorage.setItem('task' , JSON.stringify(args) );
+}
+
 export function toogleCheckbox (state, payload) {
     const {tasks} = state;
     const {id, name} = payload;
@@ -11,10 +16,11 @@ export function toogleCheckbox (state, payload) {
 
         }
 
-        return elem;
-
+        return elem
+        
     })
     
+    recLocalstorage({...state, tasks : newTask})
     return {...state, tasks : newTask}
 }
 
@@ -32,6 +38,7 @@ export function deleteTask (state) {
         return elem
     })
 
+    recLocalstorage({...state, tasks : newTask})
     return {...state, tasks : newTask}
 }
 
@@ -46,7 +53,9 @@ export function createTask (state) {
             shouldByFinish : false,
             id: randomId()
     }
-    return {...state, createTask : createTask, neededCreateNewTask : true, startEditedTask: false, }
+
+    recLocalstorage({...state, createTask : createTask, neededCreateNewTask : true, startEditedTask: false })
+    return {...state, createTask : createTask, neededCreateNewTask : true, startEditedTask: false }
 }
 
 /**
@@ -67,6 +76,14 @@ export function taskSave (state, payload) {
         return elem
     })
 
+    recLocalstorage({
+        ...state, 
+        tasks : newTask, 
+        neededCreateNewTask : false,
+        startEditedTask: false, 
+        editedTask: {}
+    })
+
     return {
         ...state, 
         tasks : newTask, 
@@ -84,6 +101,14 @@ export function taskSaveCreate (state) {
 
     tasks.push(createTask);
 
+    recLocalstorage({
+        ...state, 
+        tasks : tasks, 
+        neededCreateNewTask : false,
+        startEditedTask: false, 
+        createTask : {}
+    })
+
     return {
         ...state, 
         tasks : tasks, 
@@ -96,7 +121,8 @@ export function taskSaveCreate (state) {
 /**
  * Отменить создание задачи
  */
-export function cancelCreateTask (state) {
+export function CancelCreateTask (state) {
+    recLocalstorage({...state, neededCreateNewTask : false, startEditedTask: false,  createTask : {}})
     return {...state, neededCreateNewTask : false, startEditedTask: false,  createTask : {}}
 }
 
@@ -105,6 +131,7 @@ export function cancelCreateTask (state) {
  */
 export function editField (state, payload) {
     const {name, value, typeTask} = payload;
+    recLocalstorage({...state, [typeTask] : {...state[typeTask], [name]: value } })
     return {...state, [typeTask] : {...state[typeTask], [name]: value } }
 }
 
@@ -123,6 +150,8 @@ export function editTask (state, payload) {
 
         return false
     })
+
+    recLocalstorage({...state, editedTask: editedTask[0], startEditedTask: true });
 
     return {...state, editedTask: editedTask[0], startEditedTask: true }
 }
