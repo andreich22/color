@@ -4,58 +4,23 @@
  */
 export const TASK_ADD = '@@TASK_ADD';
 
-/**
- * 
- * @type {string}
- */
-export const TASK_ = '@@TASK_;
-
-/**
- * 
- * @type {string}
- */
-export const TASK_ = '@@TASK_;
-
-/**
- * 
- * @type {string}
- */
-export const TASK_ = '@@TASK_;
-
-/**
- * 
- * @type {string}
- */
-export const TASK_ = '@@TASK_;
-
-/**
- * 
- * @type {string}
- */
-export const TASK_ = '@@TASK_;
-
-/**
- * 
- * @type {string}
- */
-export const TASK_ = '@@TASK_;
-
-/**
- * 
- * @type {string}
- */
-export const TASK_ = '@@TASK_;
-
 
 
 /**
- * Свёртывание/развёртывание выпадающей области
+ * отметить элемент для удаления
  * @type {string}
  */
-export const TASK_EDIT = '@@TASK_EDIT';
+export const TASK_SHOULD_BY_DELETE = 'TASK_SHOULD_BY_DELETE';
 
 /**
- * Скрытие редактирования
+ * Удалить задачи
  * @type {string}
  */
-export const CLOSE_EDIT = '@@CLOSE_EDIT';
+export const TASK_DELETE = 'TASK_DELETE';
+
+
+/**
+ * Создать задачу
+ * @type {string}
+ */
+export const TASK_CREATE = 'TASK_CREATE';

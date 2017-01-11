@@ -25,34 +25,39 @@ export default class ListLtem extends Component {
     }
 
     clickHnadlerСheckbox (x) {
-        this.props.clickHnadlerButton(x)
+        const {target} = x;
+        const {id} = this.props;
+        this.props.markCheckbox({id, target})
     }
 
 
     render() {
 
-    const {name, textTask, checkedDelete, checkedFinish, idTask, key} = this.props;
+    const {name, textTask, checkedDelete, checkedFinish, idTask, taskFinish} = this.props;
 
-    return <div className='list-item' key={key}>
+    return <div className='list-item'>
                 <div className='list-item-head'>{name}</div>
                 <div className='list-item-body'>{textTask}</div>
                 
                 <input 
                     type='checkbox' 
                     name='shouldByDelete' 
-                    checked={checkedDelete} 
+                    checked={checkedDelete}
+                    onClick={this.clickHnadlerСheckbox} 
                 />Отметить для удаленя
                 
                 <input 
                     type='checkbox' 
                     name='shouldByFinish' 
-                    checked={checkedFinish} 
-                />Отметить для завершения
+                    checked={checkedFinish}
+                    onClick={this.clickHnadlerСheckbox}  
+                />Завершить задачу
                 <ButtonBasic 
                     idTask={idTask}
                     clikHandler={this.clickHnadlerButton}
                     text='Редактировать задачу' 
                 />
+                {taskFinish ? 'задача завершена' : null}
            </div>
     }
 }

@@ -9,15 +9,17 @@ export default class ListLView extends Component {
         this.renderListItem = this.renderListItem.bind(this);	
     }
 
-    renderListItem () {
-      const {tasks} = this.props;
+    renderListItem (props) {
+      const {tasks, markCheckbox} = props;
       return tasks.map((elem, i) => {
         return <ListLtem 
                   key={`${i}-key`}
+                  id={elem.id}
                   name={elem.nameTask} 
                   textTask={elem.bodyTask} 
                   checkedDelete={elem.shouldByDelete}
                   checkedFinish={elem.shouldByFinish}
+                  markCheckbox={markCheckbox}
                   clickHnadlerButton={this.clickHnadlerButton}
               />
       })
@@ -26,7 +28,7 @@ export default class ListLView extends Component {
   render() {
     
     return <div>
-            {this.renderListItem()}
+            {this.renderListItem(this.props)}
           </div>
   }
 }
