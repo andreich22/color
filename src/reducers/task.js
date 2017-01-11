@@ -59,10 +59,6 @@ export default function task(state = initialState, action) {
         case types.TASK_SAVE_EDITING:
             return helpers.taskSave(state, payload)
             
-
-            
-
-            
     }
     return state;
 }

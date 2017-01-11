@@ -1,5 +1,4 @@
 import React, { Component} from 'react'
-// import ButtonBasic from '../button/ButtonBasic'
 import ListLtem from '../listItem/ListLtem'
 
 export default class ListLView extends Component {
@@ -25,10 +24,10 @@ export default class ListLView extends Component {
       })
     }
 
-  render() {
-    
-    return <div>
-            {this.renderListItem(this.props)}
-          </div>
-  }
+    render() {
+      
+      return <div>
+              {this.renderListItem(this.props)}
+            </div>
+    }
 }

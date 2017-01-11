@@ -4,8 +4,6 @@
  */
 export const TASK_ADD = '@@TASK_ADD';
 
-
-
 /**
  * отметить элемент для удаления
  * @type {string}

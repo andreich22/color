@@ -11,7 +11,6 @@ export default class ButtonBasic extends Component {
 		super(props);
 
         this.clikHandler = this.clikHandler.bind(this);
-		
 	}
 
     shouldComponentUpdate(nextProps) {
@@ -29,6 +28,7 @@ export default class ButtonBasic extends Component {
     }
 
     render() {
+
     const {text, id} = this.props;
 
     return <div>

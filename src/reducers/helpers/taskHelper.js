@@ -6,9 +6,13 @@ export function toogleCheckbox (state, payload) {
     const newTask = tasks.map((elem) => {
         if(elem.id == id) {
            elem[name] = !elem[name];
+
            return elem;
+
         }
-        return elem
+
+        return elem;
+
     })
     
     return {...state, tasks : newTask}
@@ -21,10 +25,13 @@ export function deleteTask (state) {
     const {tasks} = state;
     const newTask = tasks.filter((elem) => {
         if(elem.shouldByDelete) {
+
            return false;
         }
+
         return elem
     })
+
     return {...state, tasks : newTask}
 }
 
@@ -52,8 +59,11 @@ export function taskSave (state, payload) {
     const newTask = tasks.map((elem) => {
         if(elem.id == id) {
             elem = editedTask;
+
             return elem;
+            
         }
+
         return elem
     })
 
@@ -105,10 +115,14 @@ export function editTask (state, payload) {
     const {id} = payload;
     const {tasks} = state;
     const editedTask = tasks.filter((elem) => {
+
         if(elem.id == id) {
+
             return elem
         }
+
         return false
     })
+
     return {...state, editedTask: editedTask[0], startEditedTask: true }
 }

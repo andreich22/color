@@ -1,7 +1,6 @@
 import React, { Component, PropTypes} from 'react'
 import {connect}              from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import Modal from 'react-modal';
 import ButtonBasic from '../components/button/ButtonBasic'
 import ListLView from '../components/listLView/ListLView'
 import ModalBase from '../components/modal/ModalBase'
@@ -89,6 +88,7 @@ class App extends Component {
     const {tasks, neededCreateNewTask, createTask, editedTask, startEditedTask} = this.props;
 
     return <div>
+    
             <ButtonBasic 
               clikHandler={this.addNewTask}
               text='Добавление задачи' 

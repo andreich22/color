@@ -27,7 +27,7 @@ export default function ModalBase(props) {
             save,
             cancel,
             contentLabel
-          } = props;
+    } = props;
           
     return (
             <Modal
@@ -37,16 +37,21 @@ export default function ModalBase(props) {
             >
 
               <h2>{contentLabel}</h2>
+                
                 <input value={valueInput} name={nameValue} onChange={update}/>
+                
                 <textarea value={valueTextarea} name={nameTextarea} onChange={update}/>
+                
                 <ButtonBasic 
                     clikHandler={save}
                     text='Сохранить' 
                 />
+
                 <ButtonBasic 
                     clikHandler={cancel}
                     text='Отмена' 
                 />
+                
             </Modal>
     );
 }
