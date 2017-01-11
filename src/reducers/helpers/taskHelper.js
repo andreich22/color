@@ -32,15 +32,38 @@ export function deleteTask (state) {
  * Создает задачу
  */
 export function createTask (state) {
-    const {tasks} = state;
     const createTask = {
-            nameTask: false, 
-            bodyTask : false,
+            nameTask: '', 
+            bodyTask : '',
             shouldByDelete : false,
             shouldByFinish : false,
             id: randomId()
     }
-
-    tasks.push(createTask)
-    return {...state, tasks : tasks, neededCreateNewTask : true}
+    return {...state, createTask : createTask, neededCreateNewTask : true}
 }
+
+/**
+ * Сохранить задачу
+ */
+export function taskSave (state) {
+    const {tasks, createTask} = state;
+
+    tasks.push(createTask);
+    return {...state, tasks : tasks, neededCreateNewTask : false, createTask : {}}
+}
+
+/**
+ * Отменить создание задачи
+ */
+export function createTaskCancel (state) {
+    return {...state, neededCreateNewTask : false, createTask : {}}
+}
+
+/**
+ * Редактирование поля
+ */
+export function editField (state, payload) {
+    const {name, value} = payload;
+    return {...state, createTask : {...state.createTask, [name]: value } }
+}
+

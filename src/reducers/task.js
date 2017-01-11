@@ -20,6 +20,7 @@ const initialState = {
       id: randomId()
     }
   ],
+  createTask : {},
   shouldByCreateNewTask : false,
 };
 
@@ -41,6 +42,17 @@ export default function task(state = initialState, action) {
       //создает задачу
         case types.TASK_CREATE:
             return helpers.createTask(state, payload)
+      //Отменить создание новой задачи
+        case types.TASK_CREATE_CANCEL:
+            return helpers.createTaskCancel(state, payload)
+      //Сохранить задачу
+        case types.TASK_CREATE_CSAVE:
+            return helpers.taskSave(state, payload)
+      //Редактировать поле
+        case types.TASK_EDIT_FIELD:
+            return helpers.editField(state, payload)
+
+            
 
             
     }

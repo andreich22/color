@@ -33,20 +33,34 @@ export function createTask() {
     };
 }
 
+/**
+ * Создать задачу
+ * @returns {ReduxAction}
+ */
+export function createTaskCancel() {
+    return {
+        type: types.TASK_CREATE_CANCEL,
+    };
+}
 
 
+/**
+ * Сохранить задачу
+ * @returns {ReduxAction}
+ */
+export function taskSave() {
+    return {
+        type: types.TASK_CREATE_CSAVE,
+    };
+}
 
-// /**
-//  * Действие выбора продукта
-//  * @param {string} productVersionId идентифтикатор продукта
-//  * @returns {Function}
-//  */
-// function selectProduct(productVersionId) {
-//     return dispatch => {
-//         dispatch({
-//             type: types.PRODUCT_VERSION_SELECT,
-//             payload: productVersionId
-//         });
-//         dispatch(loadVersion(productVersionId));
-//     };
-// }
+/**
+ * Редактировать поле
+ * @returns {ReduxAction}
+ */
+export function editField(payload) {
+    return {
+        type: types.TASK_EDIT_FIELD,
+        payload: payload
+    };
+}
