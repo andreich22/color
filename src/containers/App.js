@@ -1,4 +1,4 @@
-import React, { Component} from 'react'
+import React, { Component, PropTypes} from 'react'
 import {connect}              from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import Modal from 'react-modal';
@@ -7,10 +7,6 @@ import ListLView from '../components/listLView/ListLView'
 import ModalBase from '../components/modal/ModalBase'
 import * as taskAction from '../actions/taskAction'
 
-
-
-//home/andrey/project/wily/color/src/actions/taskAction.js
-//home/andrey/project/wily/color/src/containers/App.js
 
 class App extends Component {
 
@@ -25,22 +21,27 @@ class App extends Component {
     this.CancelCreateTask = this.CancelCreateTask.bind(this);
     this.editFieldTask = this.editFieldTask.bind(this);
     this.editFieldCreateTask = this.editFieldCreateTask.bind(this);
-    
     this.taskEditedSave = this.taskEditedSave.bind(this);
     this.taskCreateSave = this.taskCreateSave.bind(this);
     
 	}
 
+  static propTypes = {
+        tasks     : PropTypes.array.isRequired,
+        createTask : PropTypes.object,
+        editedTask  : PropTypes.bool,
+        startEditedTask  : PropTypes.bool,
+        neededCreateNewTask  : PropTypes.bool,
+    };
+
   //добавить новую задчу
-  addNewTask (x) {
-    console.log('addNewTask' ,x)
+  addNewTask () {
     this.actionsTask.createTask()
   }
 
 
   //Удалить задачу Mark for Removal
-  deleteTask (x) {
-    console.log('deleteTask' ,x)
+  deleteTask () {
     this.actionsTask.deleteTask()
   }
 
@@ -52,7 +53,6 @@ class App extends Component {
 
   markCheckbox (x) {
     const {id, target : {name}} = x
-    
     this.actionsTask.markCheckbox({id, name})
   }
 
@@ -106,6 +106,7 @@ class App extends Component {
             />
             
             <ModalBase 
+              contentLabel='Создать задачу'
               isOpen={neededCreateNewTask }
               update={this.editFieldCreateTask}
               valueInput={createTask.nameTask}
@@ -117,6 +118,7 @@ class App extends Component {
             />
 
             <ModalBase 
+              contentLabel='Редактировать задачу'
               isOpen={startEditedTask}
               update={this.editFieldTask}
               valueInput={editedTask.nameTask}
@@ -126,12 +128,17 @@ class App extends Component {
               save={this.taskEditedSave}
               cancel={this.CancelCreateTask}
             />
-
-            
-
     </div>
   }
 }
+
+App.defaultProps = {
+    tasks : [],
+    createTask : {},
+    editedTask  : false,
+    startEditedTask  : false,
+    neededCreateNewTask  : false,
+};
 
 function mapStateToProps({task}) {
     return {

@@ -1,27 +1,25 @@
 import * as types from '../constans/taskActionTypes';
 import {randomId} from '../lib/id';
 import * as helpers from './helpers/taskHelper';
-// /home/andrey/project/wily/color/src/reducers/helpers/taskHelper.js
-///home/andrey/project/wily/color/src/reducers/task.js
+
 const initialState = {
   tasks : [
     { 
       nameTask: 'first', 
-      bodyTask : 'bodyTask',
+      bodyTask : 'Текст задачи',
       shouldByDelete : false,
       shouldByFinish : false,
       id: randomId()
     },
     { 
       nameTask: 'second', 
-      bodyTask : 'bodyTask',
+      bodyTask : 'Текст задачи',
       shouldByDelete : false,
       shouldByFinish : false,
       id: randomId()
     }
   ],
   createTask : {},
-  shouldByCreateNewTask : false,
   editedTask : false,
   startEditedTask: false,
   neededCreateNewTask: false

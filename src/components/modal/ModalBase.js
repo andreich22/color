@@ -1,5 +1,6 @@
 import React from 'react'
 import Modal from 'react-modal';
+import ButtonBasic from '../button/ButtonBasic';
 
 const customStyles = {
   content : {
@@ -12,7 +13,8 @@ const customStyles = {
   }
 };
 
-
+//TODO Переделать в class и добавить shouldComponentUpdate написать условия 
+// input, textarea сделать аналогично
 export default function ModalBase(props) {
 
     const {
@@ -23,21 +25,28 @@ export default function ModalBase(props) {
             valueTextarea,
             nameTextarea,
             save,
-            cancel
+            cancel,
+            contentLabel
           } = props;
-
+          
     return (
             <Modal
               isOpen={isOpen}
               style={customStyles}
-              contentLabel='Example Modal'
+              contentLabel={contentLabel}
             >
 
-              <h2>Создайте задачу</h2>
+              <h2>{contentLabel}</h2>
                 <input value={valueInput} name={nameValue} onChange={update}/>
                 <textarea value={valueTextarea} name={nameTextarea} onChange={update}/>
-                <button  onClick={save}>Сохранить</button>
-                <button  onClick={cancel}>Отмена</button>
+                <ButtonBasic 
+                    clikHandler={save}
+                    text='Сохранить' 
+                />
+                <ButtonBasic 
+                    clikHandler={cancel}
+                    text='Отмена' 
+                />
             </Modal>
     );
 }

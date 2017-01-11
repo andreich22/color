@@ -5,12 +5,9 @@ export default class ListLtem extends Component {
 
     static propTypes = {
         name     : PropTypes.string,
+        textTask : PropTypes.string,
         checkedDelete  : PropTypes.bool,
         checkedFinish  : PropTypes.bool,
-        //className: PropTypes.string,
-        //select: PropTypes.bool,
-        //clickHandler: PropTypes.func,
-        //value: PropTypes.string
     };
 
     constructor(props) {

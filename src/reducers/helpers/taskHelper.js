@@ -73,6 +73,7 @@ export function taskSaveCreate (state) {
     const {tasks, createTask} = state;
 
     tasks.push(createTask);
+
     return {
         ...state, 
         tasks : tasks, 

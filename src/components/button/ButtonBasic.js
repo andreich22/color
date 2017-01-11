@@ -4,10 +4,7 @@ export default class ButtonBasic extends Component {
 
     static propTypes = {
         text     : PropTypes.string.isRequired,
-        //className: PropTypes.string,
-        //select: PropTypes.bool,
-        clickHandler: PropTypes.func,
-        //value: PropTypes.string
+        clikHandler: PropTypes.func,
     };
 
     constructor(props) {
@@ -16,6 +13,14 @@ export default class ButtonBasic extends Component {
         this.clikHandler = this.clikHandler.bind(this);
 		
 	}
+
+    shouldComponentUpdate(nextProps) {
+        if(this.props.id == nextProps.id && this.props.clikHandler == nextProps.clikHandler && this.props.text == nextProps.text) {
+            return false;
+        }
+        
+        return true;
+    }
 
 
     //Обработчик клика
@@ -34,5 +39,6 @@ export default class ButtonBasic extends Component {
 
 ButtonBasic.defaultProps = {
   text: 'Stranger',
-  clickHandler: x=>x
+  clikHandler: x=>x,
+  id: 1
 };
