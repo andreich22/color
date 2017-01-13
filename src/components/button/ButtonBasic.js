@@ -1,24 +1,5 @@
 import React, { Component, PropTypes} from 'react'
 
-function Animal(name) {
-    this.name = name;
-    this.calWalk =true;
-}
-
-var animal = new Animal('skotinka');
-
-function Rabbit(name) {
-    this.name = name;
-}
-
-Rabbit.prototype = animal;
-
-var big = new Rabbit('Chuk');
-
-console.log('big' , big);
-
-console.log('calWalk' , big.calWalk);
-
 export default class ButtonBasic extends Component {
 
     static propTypes = {

@@ -2,12 +2,9 @@ import { compose, createStore } from 'redux'
 import persistState from 'redux-localstorage'
 import rootReducer from '../reducers'
 
-
 const enhancer = compose(
-  
   persistState('task'/*paths, config*/),
 )
-
 
 export default function configureStore(initialState) {
   const store = createStore(rootReducer, initialState, enhancer)

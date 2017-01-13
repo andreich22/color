@@ -3,23 +3,26 @@ import {randomId} from '../lib/id';
 import * as helpers from './helpers/taskHelper';
 
 
+function createTasks () {
+  let array = [];
+  let idArray = [];
+  for (let index = 0; index < 1500; index++) {
+    const id =  randomId()
+    array.push({ 
+      nameTask: 'name'+ index, 
+      bodyTask : 'Текст задачи'+ index,
+      shouldByDelete : false,
+      shouldByFinish : false,
+      id: id
+    })
+    
+    idArray.push(id);
+  }
+  return array;
+}
+
 const initialState = {
-  tasks : [
-    { 
-      nameTask: 'first', 
-      bodyTask : 'Текст задачи',
-      shouldByDelete : false,
-      shouldByFinish : false,
-      id: randomId()
-    },
-    { 
-      nameTask: 'second', 
-      bodyTask : 'Текст задачи',
-      shouldByDelete : false,
-      shouldByFinish : false,
-      id: randomId()
-    }
-  ],
+  tasks : createTasks(),
   createTask : {},
   editedTask : false,
   startEditedTask: false,
