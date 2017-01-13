@@ -3,32 +3,67 @@ import {randomId} from '../lib/id';
 import * as helpers from './helpers/taskHelper';
 
 
-function createTasks () {
-  let array = [];
-  let idArray = [];
-  for (let index = 0; index < 1500; index++) {
-    const id =  randomId()
-    array.push({ 
-      nameTask: 'name'+ index, 
-      bodyTask : 'Текст задачи'+ index,
-      shouldByDelete : false,
-      shouldByFinish : false,
-      id: id
-    })
+// function createTasks () {
+//   let array = [];
+//   let idArray = [];
+
+//   for (let index = 0; index < 1500; index++) {
+//     const id =  randomId();
     
-    idArray.push(id);
+//     array.push({ 
+//       nameTask: 'name'+ index, 
+//       bodyTask : 'Текст задачи'+ index,
+//       shouldByDelete : false,
+//       shouldByFinish : false,
+//       id: id
+//     })
+
+//     idArray.push(id);
+//   }
+//   return array;
+// }
+
+
+function createTasks () {
+  let task = {};
+  let tasksOrder = [];
+
+  for (let index = 0; index < 3; index++) {
+    const id =  'task-id-' + randomId();
+
+    task[id] = { 
+          nameTask: 'name'+ index, 
+          bodyTask : 'Текст задачи'+ index,
+          shouldByDelete : false,
+          shouldByFinish : false,
+          id: id
+    }
+
+    tasksOrder.push(id);
   }
-  return array;
+  
+  return {tasksOrder : tasksOrder, task : task };
 }
 
+
+// const state = {
+//   targetsOrder: ['id-1', 'id-2'],
+//   targets: {
+//     'id-1': { id: 'id-1', radius: 10 },
+//     'id-2': { id: 'id-2', radius: 20 },
+//   }
+// };
+
 const initialState = {
-  tasks : createTasks(),
+  tasks : createTasks().task,
+  tasksOrder : createTasks().tasksOrder,
   createTask : {},
   editedTask : false,
   startEditedTask: false,
   neededCreateNewTask: false
 };
 
+console.log('initialState', initialState)
 
 /**
  * Создаёт редьюсер для задач

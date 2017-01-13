@@ -2,7 +2,7 @@ import React, { Component, PropTypes} from 'react'
 import {connect}              from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ButtonBasic from '../components/button/ButtonBasic'
-import ListLView from '../components/listLView/ListLView'
+import {ListLView} from '../components/listLView/ListLView'
 import ModalBase from '../components/modal/ModalBase'
 import * as taskAction from '../actions/taskAction'
 
