@@ -1,4 +1,3 @@
-import {isEmpty} from 'ramda';
 import * as types from '../constans/taskActionTypes';
 import {randomId} from '../lib/id';
 import * as helpers from './helpers/taskHelper';
@@ -27,30 +26,13 @@ const initialState = {
   neededCreateNewTask: false
 };
 
-// localStorage.setItem('task' , '');
-
-//Если localStorage не пустой то берем state из него
-function getInit (initialState){
-  let storageState = {};
-  if(localStorage.task){
-    storageState = JSON.parse(localStorage.task)
-  }
-
-  if(isEmpty(storageState) === false){
-    return storageState
-  }
-
-  JSON.stringify(initialState)
-  localStorage.setItem('task' , JSON.stringify(initialState));
-  return initialState
-}
 
 /**
  * Создаёт редьюсер для задач
  * @param {object} state
  * @returns {object} action
  */
-export default function task(state = getInit(initialState), action) {
+export default function task(state = initialState, action) {
     const {payload, type} = action;
     switch (type) {
       //Переключает чекбоксы
