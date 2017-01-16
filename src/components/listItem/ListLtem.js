@@ -1,11 +1,12 @@
 import React, { Component, PropTypes} from 'react'
+import {connect}              from 'react-redux';
 import ButtonBasic from '../button/ButtonBasic'
 
-export default class ListLtem extends Component {
+class ListLtem extends Component {
 
     static propTypes = {
         name     : PropTypes.string,
-        textTask : PropTypes.string,
+        text : PropTypes.string,
         checkedDelete  : PropTypes.bool,
         checkedFinish  : PropTypes.bool,
     };
@@ -27,28 +28,28 @@ export default class ListLtem extends Component {
         this.props.toogleChekbox({id, target})
     }
 
-
     render() {
 
-    const {name, textTask, checkedDelete, checkedFinish, id} = this.props;
+    const {name, text, shouldByDelete, shouldByFinish, id} = this.props;
 
     return <div className='list-item'>
                 <div className='list-item-head'>{name}</div>
-                <div className='list-item-body'>{textTask}</div>
+                <div className='list-item-body'>{text}</div>
                 
                 <input 
                     type='checkbox' 
                     name='shouldByDelete' 
-                    checked={checkedDelete}
+                    checked={shouldByDelete}
                     onClick={this.clickHnadlerСheckbox} 
                 />Отметить для удаленя
                 
                 <input 
                     type='checkbox' 
                     name='shouldByFinish' 
-                    checked={checkedFinish}
+                    checked={shouldByFinish}
                     onClick={this.clickHnadlerСheckbox}  
                 />Завершить задачу
+
                 <ButtonBasic 
                     id={id}
                     clikHandler={this.clickHnadlerButton}
@@ -58,10 +59,14 @@ export default class ListLtem extends Component {
     }
 }
 
+export default connect((state, ownProps) => {
+   return { ...state.task.tasks[ownProps.id] }
+})(ListLtem);
+
 ListLtem.defaultProps = {
-  name: 'Stranger',
-  textTask: 'Описание задачи',
-  checkedDelete: false,
-  checkedFinish : false,
+  name: 'default',
+  text: 'default',
+  shouldByDelete: false,
+  shouldByFinish : false,
   idTask: 1
 };

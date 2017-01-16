@@ -2,7 +2,7 @@ import React, { Component, PropTypes} from 'react'
 import {connect}              from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ButtonBasic from '../components/button/ButtonBasic'
-import {ListLView} from '../components/listLView/ListLView'
+import ListLView from '../components/listLView/ListLView'
 import ModalBase from '../components/modal/ModalBase'
 import * as taskAction from '../actions/taskAction'
 
@@ -70,13 +70,13 @@ class App extends Component {
 
   //Редактировать поле созданой задачи
   editFieldCreateTask (x) {
-    const {name, value} =x.target
+    const {name, value} = x.target
     this.actionsTask.editField({name, value, typeTask : 'createTask' })
   }
 
   //Редактировать поле задачи
   editFieldTask (x) {
-    const {name, value} =x.target
+    const {name, value} = x.target
     this.actionsTask.editField({name, value, typeTask : 'editedTask' })
   }
 
@@ -93,7 +93,7 @@ class App extends Component {
   }
 
   render() {
-    const {tasks, neededCreateNewTask, createTask, editedTask, startEditedTask} = this.props;
+    const {tasks, tasksOrder, neededCreateNewTask, createTask, editedTask, startEditedTask} = this.props;
 
     return <div>
     
@@ -108,7 +108,8 @@ class App extends Component {
              />
             
             <ListLView 
-              tasks={tasks} 
+              tasks={tasks}
+              tasksOrder={tasksOrder}
               toogleChekbox={this.toogleChekbox}
               clickHnadlerButton={this.clickHnadlerButton}
             />
@@ -117,10 +118,10 @@ class App extends Component {
               contentLabel='Создать задачу'
               isOpen={neededCreateNewTask }
               update={this.editFieldCreateTask}
-              valueInput={createTask.nameTask}
-              nameValue='nameTask'
-              valueTextarea={createTask.bodyTask}
-              nameTextarea='bodyTask'
+              valueInput={createTask.name}
+              nameValue='name'
+              valueTextarea={createTask.text}
+              nameTextarea='text'
               save={this.taskCreateSave}
               cancel={this.cancelCreateTask}
             />
@@ -129,10 +130,10 @@ class App extends Component {
               contentLabel='Редактировать задачу'
               isOpen={startEditedTask}
               update={this.editFieldTask}
-              valueInput={editedTask.nameTask}
-              nameValue='nameTask'
-              valueTextarea={editedTask.bodyTask}
-              nameTextarea='bodyTask'
+              valueInput={editedTask.name}
+              nameValue='name'
+              valueTextarea={editedTask.text}
+              nameTextarea='text'
               save={this.taskEditedSave}
               cancel={this.cancelCreateTask}
             />

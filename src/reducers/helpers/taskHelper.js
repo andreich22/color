@@ -2,38 +2,49 @@ import {randomId} from '../../lib/id';
 
 
 export function toogleCheckbox (state, payload) {
-    const {tasks} = state;
+    let {tasks} = state;
     const {id, name} = payload;
-    const newTask = tasks.map((elem) => {
-        if(elem.id == id) {
-           elem[name] = !elem[name];
+    tasks[id][name] = !tasks[id][name];
 
-           return elem;
-
-        }
-
-        return elem
-        
-    })
-    
-    return {...state, tasks : newTask}
+    return {...state, 
+        tasks : tasks
+    }
 }
 
 /**
  * удалаяет задачи
+ * TODO Надо переделать удаления
  */
 export function deleteTask (state) {
-    const {tasks} = state;
-    const newTask = tasks.filter((elem) => {
-        if(elem.shouldByDelete) {
+    let {tasks, tasksOrder} = state;
 
-           return false;
+    for (var key in tasks) {
+        if (tasks.hasOwnProperty(key)) {
+            var element = tasks[key];
+            if (element.shouldByDelete) {
+                delete tasks[key];
+                delete tasksOrder[key];
+                tasksOrder = deleteElemArray(tasksOrder, key)
+            }
         }
+    }
 
-        return elem
+    return {...state, 
+        tasks : tasks,
+        tasksOrder: tasksOrder
+    }
+}
+
+/**
+ * Удаляет из массива элемент по значению поля
+ */
+function deleteElemArray (array, field) {
+    return array.filter((elem) => {
+        if (elem == field) {
+            return false;
+        }
+        return true;
     })
-
-    return {...state, tasks : newTask}
 }
 
 /**
@@ -41,14 +52,18 @@ export function deleteTask (state) {
  */
 export function createTask (state) {
     const createTask = {
-            nameTask: '', 
-            bodyTask : '',
+            name: '', 
+            text : '',
             shouldByDelete : false,
             shouldByFinish : false,
             id: randomId()
     }
 
-    return {...state, createTask : createTask, neededCreateNewTask : true, startEditedTask: false }
+    return {...state, 
+        createTask : createTask, 
+        neededCreateNewTask : true, 
+        startEditedTask: false 
+    }
 }
 
 /**
@@ -56,24 +71,15 @@ export function createTask (state) {
  */
 export function taskSave (state, payload) {
     const {id} = payload;
-    const {tasks, editedTask} = state;
+    let {tasks, editedTask} = state;
 
-    const newTask = tasks.map((elem) => {
-        if(elem.id == id) {
-            elem = editedTask;
-
-            return elem;
-            
-        }
-
-        return elem
-    })
+    tasks[id] = editedTask;
 
     return {
         ...state, 
-        tasks : newTask, 
+        tasks, 
         neededCreateNewTask : false,
-        startEditedTask: false, 
+        startEditedTask: false,
         editedTask: {}
     }
 }
@@ -83,13 +89,15 @@ export function taskSave (state, payload) {
  */
 export function taskSaveCreate (state) {
     const {tasks, createTask} = state;
+    let {tasksOrder} = state;
+    const {id} = createTask;
 
-    tasks.push(createTask);
-
+    tasks[id] = createTask;
+    tasksOrder.push(id);
 
     return {
         ...state, 
-        tasks : tasks, 
+        tasks, 
         neededCreateNewTask : false,
         startEditedTask: false, 
         createTask : {}
@@ -100,7 +108,11 @@ export function taskSaveCreate (state) {
  * Отменить создание задачи
  */
 export function cancelCreateTask (state) {
-    return {...state, neededCreateNewTask : false, startEditedTask: false,  createTask : {}}
+    return {...state, 
+        neededCreateNewTask : false, 
+        startEditedTask: false, 
+        createTask : {}
+    }
 }
 
 /**
@@ -108,24 +120,22 @@ export function cancelCreateTask (state) {
  */
 export function editField (state, payload) {
     const {name, value, typeTask} = payload;
-    return {...state, [typeTask] : {...state[typeTask], [name]: value } }
+    return {
+        ...state, 
+        [typeTask] : {...state[typeTask], [name]: value}
+    }
 }
 
 /**
  * Редактирование задачи
+ * TODO Вынести состояние формы в отдельный редюсер
  */
 export function editTask (state, payload) {
     const {id} = payload;
     const {tasks} = state;
-    const editedTask = tasks.filter((elem) => {
 
-        if(elem.id == id) {
-
-            return elem
-        }
-
-        return false
-    })
-
-    return {...state, editedTask: editedTask[0], startEditedTask: true }
+    return {...state, 
+        editedTask: tasks[id], 
+        startEditedTask: true 
+    }
 }
