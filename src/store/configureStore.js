@@ -1,12 +1,19 @@
-import { compose, createStore } from 'redux'
+import { compose, createStore, applyMiddleware } from 'redux'
 import persistState from 'redux-localstorage'
+// import thunk from 'redux-thunk';
+// import promise from 'redux-promise';
+import createLogger from 'redux-logger';
 import rootReducer from '../reducers'
 
+const loger = createLogger();
 const enhancer = compose(
-  persistState('task'/*paths, config*/),
+  persistState('task', ''/*paths, config*/),
+  applyMiddleware(loger)
 )
 
+
 export default function configureStore(initialState) {
+  
   const store = createStore(rootReducer, initialState, enhancer)
 
   if (module.hot) {
@@ -16,5 +23,5 @@ export default function configureStore(initialState) {
     })
   }
 
-  return store
+  return store;
 }
